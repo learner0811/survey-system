@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>survey</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Arbutus+Slab">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Manuale">
+<link rel="stylesheet" href="assets/css/create-survey.css">
+<link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/angular-growl.min.css">
+</head>
+
+<body ng-app="editSurveyApp" ng-controller="editSurveyCtr">
+	<div id="wrapper">
+		<div class="header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row header-brand">
+							<div class="col-md-3">
+								<img src="assets/img/logo.png" width="100px" height="90px">
+							</div>
+							<div class="col-md-9 header-brand-title">
+								<p>Hệ thống khảo sát trực tuyến</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="row header-info">
+							<div class="col-md-5 offset-7">
+								<p>Km 10 Nguyễn Trãi, 96 Trần phú</p>
+								<p>
+									<i class="fa fa-phone"></i>&nbsp; 024 3352 8122
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="content">			
+			<div class="container create-box">
+				<div class="row">
+					<div growl></div>
+				</div>
+				<div class="row create-survey-box">
+					<div class="col-md-2">
+						<label>Tên bài khảo sát</label>
+					</div>
+					<div class="col-md-4">
+						<input type="text" class="input" ng-model="survey.name">
+					</div>
+					<div class="col-md-2">
+						<label>Thể loại</label>
+					</div>
+					<div class="col-md-4">
+						<select class="form-control" ng-model="survey.category"
+							ng-options="category.name for category in categories">
+						</select>
+					</div>
+				</div>
+				<div ng-repeat="question in survey.questions">
+					<div ng-if="question.type == '12'">
+						<div class="row question-box">
+							<div class="col-md-8">
+								<div class="row question-name-row">
+									<div class="col-md-12">
+										<input type="text" placeholder="Câu hỏi"
+											ng-model="question.name">
+										<div style="display: none">{{question.order = $index}}</div>
+									</div>
+								</div>
+								<div class="row answer-row"
+									ng-repeat="choice in survey.questions[$index].choices">
+									<div class="col-md-1">
+										<input type="radio" disabled="disabled">
+									</div>
+									<div class="col-md-11">
+										<input type="text" ng-model="choice.answer"><i
+											class="fa fa-close"
+											ng-click="remove_answer($parent.$index, $index)"></i>
+									</div>
+								</div>
+								<div class="row answer-row">
+									<div class="col-md-1">
+										<input type="radio" disabled="disabled">
+									</div>
+									<div class="col-md-11">
+										<input type="text" placeholder="Thêm câu trả lời"
+											ng-click="add_answer($index)" readonly="readonly">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 row-remove-question">
+										<div class="remove-btn" ng-click="remove_question($index)">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<select class="form-control" ng-model="question.type"
+									ng-change="change_quest($index)">
+									<option value="12" selected="">Câu hỏi trắc nghiệm</option>
+									<option value="13">Câu hỏi nhiều lựa chọn</option>
+									<option value="14">Câu hỏi mở</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div ng-if="question.type == '13'">
+						<div class="row question-box">
+							<div class="col-md-8">
+								<div class="row question-name-row">
+									<div class="col-md-12">
+										<input type="text" placeholder="Câu hỏi"
+											ng-model="question.name">
+										<div style="display: none">{{question.order = $index}}</div>
+									</div>
+								</div>
+								<div class="row answer-row"
+									ng-repeat="choice in survey.questions[$index].choices">
+									<div class="col-md-1">
+										<input type="checkbox" disabled="disabled">
+									</div>
+									<div class="col-md-11">
+										<input type="text" ng-model="choice.answer"><i
+											class="fa fa-close"
+											ng-click="remove_answer($parent.$index, $index)"></i>
+									</div>
+								</div>
+								<div class="row answer-row">
+									<div class="col-md-1">
+										<input type="checkbox" disabled="disabled">
+									</div>
+									<div class="col-md-11">
+										<input type="text" placeholder="Thêm câu trả lời"
+											ng-click="add_answer($index)" readonly="readonly">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 row-remove-question">
+										<div class="remove-btn" ng-click="remove_question($index)">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<select class="form-control" ng-model="question.type"
+									ng-change="change_quest($index)">
+									<option value="12" selected="">Câu hỏi trắc nghiệm</option>
+									<option value="13">Câu hỏi nhiều lựa chọn</option>
+									<option value="14">Câu hỏi mở</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div ng-if="question.type == '14'">
+						<div class="row question-box">
+							<div class="col-md-8">
+								<div class="row question-name-row">
+									<div class="col-md-12">
+										<input type="text" placeholder="Câu hỏi" ng-model="question.name">
+									</div>
+								</div>
+								<div class="row answer-row">
+									<div class="col-md-12">
+										<input type="text" readonly="" placeholder="Câu trả lời">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 row-remove-question">
+										<div class="remove-btn" ng-click="remove_question($index)">
+											<i class="fa fa-trash-o fa-2x"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<select class="form-control" ng-model="question.type"
+									ng-change="change_quest($index)">
+									<option value="12" selected="">Câu hỏi trắc nghiệm</option>
+									<option value="13">Câu hỏi nhiều lựa chọn</option>
+									<option value="14">Câu hỏi mở</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row add-question-box">
+					<div class="col-md-2">
+						<div class="add-question">
+							<button class="btn btn-outline-primary add-question-btn"
+								type="button" ng-click="add_question()">
+								<i class="fa fa-plus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="add-survey">
+							<button class="btn btn-outline-primary add-survey-btn"
+								type="button" ng-click="add_survey()">
+								<i class="fa fa-save"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/angular.js" type="text/javascript"></script>
+	<script src="assets/js/angular-growl.min.js" type="text/javascript"></script>
+	<script src="assets/app/editService.js" type="text/javascript"></script>
+	<script src="assets/app/editCtr.js" type="text/javascript"></script>
+	<script src="assets/app/editApp.js" type="text/javascript"></script>
+</body>
+
+</html>

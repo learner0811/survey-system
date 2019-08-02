@@ -1,0 +1,64 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+#wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+#content {
+  min-height: 600px;
+}
+
+.survey-link p {
+  text-align: center;
+}
+
+.survey-link img {
+  display: block;
+  margin: 0 auto;
+}
+
+.survey-link a {
+  text-decoration: none;
+}
+
+.header {
+  height: auto;
+  background: url(../../assets/img/header-bg.png);
+}
+
+.header img {
+  margin: 20px 0px 20px 30px;
+}
+
+.header-brand p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 25px;
+  text-transform: uppercase;
+  width: 100%;
+  font-size: 15px;
+}
+
+.col-md-6.header-brand-title {
+  text-align: center;
+  position: relative;
+}
+
+.row.header-info p {
+  margin-top: 20px;
+}
+
+.header p {
+  color: #ffffff;
+}
+
+body {
+  font-family: Manuale;
+}
+

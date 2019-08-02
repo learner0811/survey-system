@@ -1,0 +1,14 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-3 survey-link" ng-repeat="survey in surveys">
+			<a href="#/survey?id={{survey.idsurvey}}"><img
+				src="assets/img/survey.png">
+				<p>
+					<i class="fa fa-pencil"></i>&nbsp;{{survey.name}}
+				</p>
+				<p>
+					<i class="fa fa-list-alt"></i>&nbsp;{{survey.category.name}}&nbsp;
+				</p></a>
+		</div>
+	</div>
+</div>

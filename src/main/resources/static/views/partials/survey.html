@@ -1,0 +1,130 @@
+
+
+<div id="content">
+	<div class="container create-box">
+		<div class="row">
+			<div growl></div>
+		</div>
+		<div class="row create-survey-box">
+			<div class="col-md-12" style="text-align: center;">
+				<h4>{{survey.name}}</h4>
+			</div>
+		</div>
+		{{answersheet}}
+		<div class="row participan_form">
+			<div class="col-md-4">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text"></span>
+					</div>
+					<input type="text" class="form-control" placeholder="Email"
+						aria-label="Email" aria-describedby="basic-addon1"
+						ng-model="answer_sheet.participant.email">
+				</div>
+			</div>
+			<div class="col-md-8"></div>
+			<div class="col-md-4">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text"></span>
+					</div>
+					<input type="text" class="form-control" placeholder="Name"
+						aria-label="username" aria-describedby="basic-addon1"
+						ng-model="answer_sheet.participant.name">
+				</div>
+			</div>
+			<div class="col-md-8"></div>
+			<div class="col-md-4">
+				<div class="input-group mb-3">
+					<div class="input-group-prepend">
+						<span class="input-group-text"></span>
+					</div>
+					<input type="text" class="form-control" placeholder="Phone number"
+						aria-label="phone" aria-describedby="basic-addon1"
+						ng-model="answer_sheet.participant.phone">
+				</div>
+			</div>
+			<div class="col-md-8"></div>
+		</div>
+		<div ng-repeat="question in survey.questions">
+			<div ng-if="question.type == '12'">
+				<div class="row question-box">
+					<div class="col-md-8">
+						<div class="row question-name-row">
+							<div class="col-md-12">
+								<input type="text" placeholder="Câu hỏi"
+									ng-model="question.name" readonly="readonly">
+								<div style="display: none">{{question.order = $index}}</div>
+							</div>
+						</div>
+						<div class="row answer-row"
+							ng-repeat="choice in survey.questions[$index].choices">
+							<div class="col-md-1"
+								ng-init="$first?(answer_sheet.answers[$parent.$index].tempAnswer = choice.answer) : ''">
+								<input type="radio" ng-value="choice.answer" name="choice"
+									ng-model="answer_sheet.answers[$parent.$index].tempAnswer">
+							</div>
+							<div class="col-md-11">
+								<input type="text" ng-model="choice.answer" readonly="readonly">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="question.type == '13'">
+				<div class="row question-box">
+					<div class="col-md-8">
+						<div class="row question-name-row">
+							<div class="col-md-12">
+								<input type="text" placeholder="Câu hỏi"
+									ng-model="question.name">
+								<div style="display: none">{{question.order = $index}}</div>
+							</div>
+						</div>
+						<div class="row answer-row"
+							ng-repeat="choice in survey.questions[$index].choices">
+							<div class="col-md-1">
+								<input type='checkbox' ng-true-value="'{{choice.answer}}'"
+									ng-false-value="''" name="choice"
+									ng-model="answer_sheet.answers[$parent.$index].tempAnswer[$index]">
+							</div>
+							<div class="col-md-11">
+								<input type="text" ng-model="choice.answer" readonly="readonly">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="question.type == '14'">
+				<div class="row question-box">
+					<div class="col-md-8">
+						<div class="row question-name-row">
+							<div class="col-md-12">
+								<input type="text" placeholder="Câu hỏi" readonly="readonly"
+									ng-model="question.name">
+							</div>
+						</div>
+						<div class="row answer-row">
+							<div class="col-md-12">
+								<input type="text" placeholder="Câu trả lời"
+									ng-model="answer_sheet.answers[$parent.$index].tempAnswer">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row add-question-box">
+			<div class="col-md-2">
+				<div class="add-question">
+					<button class="btn btn-outline-primary add-question-btn"
+						type="button" ng-click="save_answersheet()"
+						ng-disabled="sendDisable">
+						<i class="fa fa-send-o"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

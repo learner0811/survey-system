@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Survey System</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Arbutus+Slab">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Manuale">
+<link rel="stylesheet" href="assets/css/register.css">
+<link rel="stylesheet" href="assets/css/angular-growl.min.css">
+<link rel="stylesheet" href="assets/css/chosen.css">
+</head>
+<body ng-app="register" ng-controller="registerCtr">	
+	<div class="container register">
+		<div class="row">
+			<div class="col-md-3 register-left">
+				<h3>Welcome</h3>
+				<input type="submit" name="" value="Login" /><br />
+			</div>
+			<div class="col-md-9 register-right">
+				<div class="tab-content" id="myTabContent">
+					<div class="tab-pane fade show active" id="home" role="tabpanel"
+						aria-labelledby="home-tab">
+						<div growl></div>	
+						<h3 class="register-heading">Create new Employee</h3>
+						<div class="row register-form">
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="text" class="form-control" placeholder="Name *"
+										value="" ng-model="user.name" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control"
+										placeholder="Username *" value="" ng-model="user.account.username"/>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"
+										placeholder="Password *" value="" ng-model="user.account.password"/>
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"
+										placeholder="Confirm Password *" value=""
+										ng-model="user.account.confirm_password" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="email" class="form-control"
+										placeholder="Your Email *" ng-model="user.email" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control"
+										placeholder="Your Phone *" ng-model="user.phone" />
+								</div>
+								<div class="form-group">
+									<!-- <input type="text" class="form-control" id="permission"
+										placeholder="Permission" ng-model="user.permission"> -->
+									<select multiple="multiple"
+										class="form-control chosen-select chosen-select-deselect"
+										ng-model="user.permissionDTO">
+										<option ng-repeat="permission in listPermissions"
+											value="{{permission.code}}">{{permission.title}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<div class="maxl">
+										<label class="radio inline"> <input type="radio"
+											name="gender" value="male" ng-model="user.gender">
+											<span> Male </span>
+										</label> <label class="radio inline"> <input type="radio"
+											name="gender" value="female" ng-model="user.gender">
+											<span>Female </span>
+										</label>
+									</div>
+								</div>
+								<input type="submit" class="btnRegister" value="Register" ng-click="register()"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/js/chosen.jquery.js"></script>
+	<script src="assets/js/angular.js" type="text/javascript"></script>
+	<script src="assets/js/angular-growl.min.js" type="text/javascript"></script>
+	<script src="assets/app/registerService.js" type="text/javascript"></script>
+	<script src="assets/app/registerCtr.js" type="text/javascript"></script>
+	<script src="assets/app/registerApp.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	
+	</script>
+</body>
+</html>
