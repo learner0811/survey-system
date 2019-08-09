@@ -1,0 +1,74 @@
+<div class="container register">
+	<div style="display: block">{{ formValid = registerForm.$valid}}</div>
+	<div class="row">
+		<div class="col-md-3 register-left">
+			<h3>Welcome</h3>
+		</div>
+		<div class="col-md-9 register-right">
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel"
+					aria-labelledby="home-tab">
+					<div growl></div>
+					<h3 class="register-heading">Thêm mới nhân viên</h3>
+					<form name="registerForm">
+						<div class="row register-form">
+							<div class="col-md-6">
+								<div class="form-group has-error">
+									<input type="text" class="form-control" placeholder="Tên *"
+										value="" ng-model="user.name" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control"
+										placeholder="Tên tài khoản *" value=""
+										ng-model="user.account.username" />
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"
+										placeholder="Mật khẩu *" value=""
+										ng-model="user.account.password" />
+								</div>
+								<div class="form-group">
+									<input type="password" class="form-control"
+										placeholder="Mật khẩu nhập lại *" value=""
+										ng-model="user.account.confirm_password" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<input type="email" class="form-control" placeholder="Email *"
+										ng-model="user.email" />
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control"
+										placeholder="Số điện thoại *" ng-model="user.phone" />
+								</div>
+								<div class="form-group">
+									<select multiple="multiple"
+										class="form-control chosen-select chosen-select-deselect"
+										ng-model="user.permissionDTO">
+										<option ng-repeat="permission in listPermissions"
+											value="{{permission.code}}">{{permission.title}}</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<div class="maxl">
+										<label class="radio inline"> <input type="radio"
+											name="gender" value="male" ng-model="user.gender"> <span>
+												Nam </span>
+										</label> <label class="radio inline"> <input type="radio"
+											name="gender" value="female" ng-model="user.gender">
+											<span>Nữ </span>
+										</label>
+									</div>
+								</div>
+								<input type="submit" class="btnRegister" value="Đăng ký"
+									ng-click="register()" />
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

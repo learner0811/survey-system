@@ -1,0 +1,29 @@
+<div class="container-fluid">
+	<div growl></div>
+	<div class="row">
+		<div class="col-md-3 survey-link" ng-repeat="survey in surveys">
+			<div class="col-md-12 survey-setting">
+				<img src="assets/img/survey.png">
+				<div class="dropdown pull-right">
+					<button style="border: none; background: none; outline: none;"
+						type="button" data-toggle="dropdown">
+						<i class="fa fa-ellipsis-v fa-1x"></i>
+					</button>
+					<div class="dropdown-menu">
+						<a href="#/create" class="dropdown-item">Tạo khảo sát</a> <a
+							href="#/edit?id={{survey.idsurvey}}" class="dropdown-item">Sửa
+							Khảo sát</a> <a class="dropdown-item"
+							ng-click="deleteSurvey(survey.idsurvey)">Xóa khảo sát</a>
+							<a class="dropdown-item" href="#/answersheet?id={{survey.idsurvey}}">Xem bài trả lời</a>
+					</div>
+				</div>
+			</div>
+			<p>
+				<i class="fa fa-pencil"></i>&nbsp;{{survey.name}}
+			</p>
+			<p>
+				<i class="fa fa-list-alt"></i>&nbsp;{{survey.category.name}}&nbsp;
+			</p>
+		</div>
+	</div>
+</div>

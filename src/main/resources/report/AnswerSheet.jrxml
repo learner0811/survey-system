@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.9.0.final using JasperReports Library version 6.9.0-cb8f9004be492ccc537180b49c026951f4220bf3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AnswerSheet" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c24f3ee3-e013-456f-aefe-20fe1891da91">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="survey"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="395"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="591"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dataset1" uuid="9e48b324-2f79-4a0c-b1df-e29e9353e7fe">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="survey"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="531"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="455"/>
+		<parameter name="idanswer_sheet" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[$P{idanswer_sheet}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[SELECT (orderno+1) orderno, q.name,
+IFNULL((select GROUP_CONCAT(c.answer) from choice c where c.idquestion = q.idquestion), '') choice,
+CASE q.type
+    WHEN 12  THEN "Câu hỏi trắc nghiệm"
+    WHEN 13 THEN "Câu hỏi nhiều lựa chọn"
+    ELSE "Câu hỏi mở"
+END type,  a.answer
+FROM answer_sheet ash 
+inner join answer a on ash.idanswer_sheet = a.idanswer_sheet 
+inner join question q on q.idquestion = a.idquestion 
+where ash.idanswer_sheet = $P{idanswer_sheet}
+order by orderno asc]]>
+		</queryString>
+		<field name="orderno" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.label" value="orderno"/>
+		</field>
+		<field name="name" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="name"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="question"/>
+		</field>
+		<field name="choice" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="choice"/>
+		</field>
+		<field name="type" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="type"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="question"/>
+		</field>
+		<field name="answer" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.label" value="answer"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="answer"/>
+		</field>
+	</subDataset>
+	<parameter name="idanswer_sheet" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{idanswer_sheet}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT ash.idanswer_sheet, ash.datecreate, p.name, p.email, p.phone, q.idsurvey
+FROM answer_sheet ash 
+inner join answer a on ash.idanswer_sheet = a.idanswer_sheet 
+inner join question q on q.idquestion = a.idquestion 
+inner join participant p on ash.idparticipant = p.idparticipant
+order by orderno asc]]>
+	</queryString>
+	<field name="idanswer_sheet" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idanswer_sheet"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="answer_sheet"/>
+	</field>
+	<field name="datecreate" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="datecreate"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="answer_sheet"/>
+	</field>
+	<field name="name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="participant"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="participant"/>
+	</field>
+	<field name="phone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="phone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="participant"/>
+	</field>
+	<field name="idsurvey" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="idsurvey"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="question"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="5" width="140" height="30" uuid="3f0a7009-3e01-4a1d-b579-b98e39aa0477"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="20"/>
+				</textElement>
+				<text><![CDATA[Phiếu trả lời số]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="5" width="50" height="30" uuid="27f64079-2efe-4e11-8215-e20b58225c37"/>
+				<textElement>
+					<font fontName="DejaVu Sans" size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{idanswer_sheet}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="134" splitType="Stretch">
+			<textField>
+				<reportElement x="130" y="10" width="100" height="30" uuid="ab38a0c6-cb20-49ec-856a-979634df760b"/>
+				<textFieldExpression><![CDATA[$F{idsurvey}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="100" height="30" uuid="61ae4bc4-0db4-4baf-8b91-35349f2b6e83"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Mã khảo sát]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="50" width="100" height="30" uuid="b1be96b4-7355-489c-b3d5-ee2157090224"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Người thực hiện]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="10" width="100" height="30" uuid="15da7daa-19d0-4b30-af35-141da5800014"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Thời gian thực hiện]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="50" width="100" height="30" uuid="be065dd5-694e-492a-80ca-7056751bc3d5"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Số điện thoại]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="90" width="100" height="30" uuid="0305a0f9-f46e-400e-a192-ac9b4949cdde"/>
+				<textElement>
+					<font fontName="DejaVu Sans"/>
+				</textElement>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="420" y="10" width="100" height="30" uuid="0ef8f8cc-5687-4c53-a6a1-0d7434d5f4aa"/>
+				<textFieldExpression><![CDATA[$F{datecreate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="50" width="100" height="30" uuid="f7f9ad8e-e682-4083-ab70-07093bf052a7"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="90" width="100" height="30" uuid="d62ba300-0921-49f0-8c73-042234d456e0"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="52" width="100" height="30" uuid="cb8a2294-f670-4bd7-ae80-6e91cd3095ec"/>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="281" splitType="Stretch">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.spreadsheet.SpreadsheetLayout"/>
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+			<componentElement>
+				<reportElement x="0" y="0" width="555" height="281" isPrintInFirstWholeBand="true" uuid="5c320d12-2bd0-4456-a17c-0a85308af68c">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<printWhenExpression><![CDATA[$V{REPORT_COUNT} == 1]]></printWhenExpression>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Dataset1" uuid="b9011caa-b045-4b76-94f9-eba0890d2eec">
+						<datasetParameter name="idanswer_sheet">
+							<datasetParameterExpression><![CDATA[$P{idanswer_sheet}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="111" uuid="221d4f67-1917-48c8-b249-1c4291026d98">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="111" height="30" uuid="de407b94-ded7-4886-801f-be6d03e3d8ea"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<text><![CDATA[Số thứ tự]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="111" height="30" uuid="10819fa0-08d2-41f2-99ff-348efb0ced31"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{orderno}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="111" uuid="9017539d-572b-4baa-afe8-1c7539fc703f">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="111" height="30" uuid="c84ad009-ba5e-4578-86c0-e22ae74d718a"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<text><![CDATA[Câu hỏi]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="111" height="30" uuid="fab4e4ff-cb00-46ea-b6e4-64375c8c171c"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="111" uuid="9fe1910e-68d4-4fd3-8d4a-749be48c08f2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="111" height="30" uuid="18740299-7923-4023-a846-e0825f585071"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<text><![CDATA[Loại]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="111" height="30" uuid="e3c38aae-7caf-4187-92c3-70bbb6c5666e"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="111" uuid="bc310b3b-8c59-4d89-81c7-386bcbf7277c">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="111" height="30" uuid="5c4fe3de-6c0b-4350-8e22-4da793666f76"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<text><![CDATA[Lựa chọn]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="111" height="30" uuid="7deb416e-d175-4ffc-b82d-4235ca77a500"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{choice}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="111" uuid="1ab1ea49-a157-4939-a61d-1675a24c7c17">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:columnHeader style="Table 1_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="111" height="30" uuid="3a652650-335d-4e6b-89a2-c6efa36b252d"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<text><![CDATA[Câu trả lời]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="111" height="30" uuid="d63c57d1-2172-4516-bb08-d3549f212420"/>
+								<textElement>
+									<font fontName="DejaVu Sans"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{answer}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

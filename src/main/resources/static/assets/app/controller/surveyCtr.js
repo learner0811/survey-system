@@ -18,17 +18,11 @@ module.controller("surveyCtr", [ "$scope", "surveyService", 'growl', '$location'
 				datecreate : ''
 			};										
 			
-			$scope.answer_sheet = answer_sheet;
-			
-			var getQueryString = function ( field, url ) {
-				var href = url ? url : window.location.href;
-				var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
-				var string = reg.exec(href);
-				return string ? string[1] : null;
-			};
+			$scope.answer_sheet = answer_sheet;						
 				
-			var url = $location.absUrl();
-			var paramId = getQueryString('id', url);				
+			var url = $location.absUrl();			
+		
+			var paramId = $location.search().id;				
 			
 			surveyService.getSurvey(paramId).then(function(response) {
 				$scope.survey = response.data;
